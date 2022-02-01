@@ -1,3 +1,9 @@
+# MeetApp
+## Objective
+To build a serverless progressive web application with ReactJS using a test-driven development (TDD) technique. This application will use google calendar API to fetch upcoming events.
+
+<br>
+
 # User Stories
 ## <strong> Feature 1: Filter events by city </strong>
 ### <strong> User Story: </strong> As a user I should be able to filter events by city, so I can see a list of events that will take place in that city
