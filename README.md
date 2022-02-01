@@ -1,53 +1,28 @@
 # User Stories
-## Feature 2: Show/hide an event's details
-### Scenario 1:
-As a User <br>
-I should be able to see a list of events with the element collapsed by default <br>
-so that I can browse events 
+## <strong> Feature 1: Filter events by city </strong>
+### <strong> User Story: </strong> As a user I should be able to filter events by city, so I can see a list of events that will take place in that city
 
-### Scenario 2:
-As a User <br>
-I should be able to expand an element to see event details <br>
-so that event details can be consumed <br>
+### Scenario 1: When user hasn’t searched for a city, show upcoming events from all cities
+&nbsp;&nbsp; <strong> Given </strong> the user has not searched for a city <br>
+&nbsp;&nbsp; <strong> When </strong> the events load <br>
+&nbsp;&nbsp; <strong> Then </strong> show events from all cities <br>
 
-### Scenario 3:
-As a User <br>
-I should be able to collapse an expanded event <br>
-so that I can continue to browse events <br>
+### Scenario 2: User should see a list of suggestions when they search for a city
+&nbsp;&nbsp; <strong> Given </strong> a user searches for a city <br>
+&nbsp;&nbsp; <strong> When </strong> the events load <br>
+&nbsp;&nbsp; <strong> Then </strong> show event suggestions for that city <br>
 
-## Feature 3: Specify number of events <br>
-### Scenario 1:
-As a User <br>
-I should be able to see a list of 32 events by default <br>
-so that there is consistency to the UI layout by default <br>
-
-### Scenario 2:
-As a User <br>
-I should be able to change the number of events I want to see <br>
-so that I can browse more effectively <br>
-
-## Feature 4: Use the app when offline
-### Scenario 1:
-As a User <br>
-I should be able to view the website while offline <br>
-so that I can view events while not connected to the internet <br>
-
-### Scenario 2:
-As a User <br>
-I should see an error when changing the settings (city, time range) while offline <br>
-so that I know why the events are not loading <br>
-
-## Feature 5: Data visualization
-### Scenario 1:
-As a User <br>
-I should be able to view a chart with the number of upcoming events <br>
-so that I can keep track of how many events are coming up in the future <br>
+### Scenario 3: User can select a city from the suggested list
+&nbsp;&nbsp; <strong> Given </strong> the suggestion list loads <br>
+&nbsp;&nbsp; <strong> When </strong> the user clicks on the dropdown <br>
+&nbsp;&nbsp; <strong> Then </strong> they can select a suggested city <br>
 
 <br>
 
-# Gherkin (Given-When-Then)
+## <strong> Feature 2: Show/hide an event's details </strong>
+### <strong> User Story:</strong> As a user I should be able click on an event element, so I can toggle to show or hide the event details
 
-## Feature 2: Show/hide an event's details
+<br>
 
 ### Scenario 1: An event element is collapsed by default
 &nbsp;&nbsp; <strong> Given </strong> the user navigates to the events page <br>
@@ -66,7 +41,10 @@ so that I can keep track of how many events are coming up in the future <br>
 
 <br>
 
-## Feature 3: Specify number of events
+## <strong> Feature 3: Specify number of events </strong>
+### <strong> User Story: </strong> As a user I should be able to see a list of 32 events by default so that there is consistency to the UI layout by default 
+
+<br>
 
 ### Scenario 1: When user hasn’t specified a number, 32 is the default number
 &nbsp;&nbsp; <strong> Given </strong> the user navigates to the events page <br>
@@ -80,7 +58,10 @@ so that I can keep track of how many events are coming up in the future <br>
 
 <br>
 
-## Feature 4: Use the app when offline
+## <strong> Feature 4: Use the app when offline </strong>
+### <strong>User Story:</strong> As a user I should be able to use the application while offline, so I can get information without an internet connection
+
+<br>
 
 ### Scenario 1: Show cached data when there’s no internet connection
 &nbsp;&nbsp; <strong> Given </strong> the user doesn't have an internet connection <br>
@@ -94,11 +75,14 @@ so that I can keep track of how many events are coming up in the future <br>
 
 <br>
 
-## Feature 5: Data visualization
+## <strong> Feature 5: Data visualization </strong>
+### <strong> User Story: </strong> As a User I should be able to view a chart with the number of upcoming events by city, so that I know what events are coming up in each city 
+
+<br>
 
 ### Scenario 1: Show a chart with the number of upcoming events in each city
-&nbsp;&nbsp; <strong> Given </strong> user navigates to chart view <br>
+&nbsp;&nbsp; <strong> Given </strong> user navigates to main page and scrolls to chart <br>
 &nbsp;&nbsp; <strong> When </strong> a chart is loaded <br>
-&nbsp;&nbsp; <strong> Then </strong> it displays the number of upcoming events in each city <br>
+&nbsp;&nbsp; <strong> Then </strong> it displays the number of upcoming events in each city
 
 
