@@ -1,10 +1,12 @@
 import React, { Component } from "react";
 import { extractLocations } from './api';
+import NumberOfEvents from "./NumberOfEvents";
 
 class CitySearch extends Component{
     state = {
         query: '',
-        suggestions: []
+        suggestions: [],
+        itemSelected: false
     }
 
     handelInputChanged = (event) =>{
@@ -15,19 +17,21 @@ class CitySearch extends Component{
         this.setState({
             query: value,
             suggestions,
+            itemSelected: false
         });
     }
 
     handleItemClicked = (suggestion)=>{
         this.setState({
-            query: suggestion
+            query: suggestion,
+            itemSelected: true
         });
     }
 
     render(){
         return (
             <div className="CitySearch">
-                <input type='text' className="city" value={this.state.query} onChange={this.handelInputChanged} />
+                <input className="city" type='text' value={this.state.query} onChange={this.handelInputChanged} />
                 <ul className="suggestions">
                     {this.state.suggestions.map((suggestion)=>(
                         <li key={suggestion} onClick={()=>this.handleItemClicked(suggestion)}>{suggestion}</li>
@@ -36,6 +40,7 @@ class CitySearch extends Component{
                         <b>see all cities</b>
                     </li>
                 </ul>
+                {this.state.query && <NumberOfEvents  />}
             </div>
         );
     };

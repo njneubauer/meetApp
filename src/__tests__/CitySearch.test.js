@@ -1,14 +1,14 @@
 import React from "react";
 import { shallow } from "enzyme";
 import CitySearch from "../CitySearch";
-import mockData from '../mockData'
+import mockData from '../mockData';
 import { extractLocations } from '../api';
 
 describe('<CitySearch /> component',()=>{
     let locations, CitySearchWrapper;
     
     beforeAll(()=>{
-        locations = extractLocations(mockData)
+        locations = extractLocations(mockData);
         CitySearchWrapper = shallow(<CitySearch locations={locations}/>);
     });
 
@@ -21,7 +21,7 @@ describe('<CitySearch /> component',()=>{
         CitySearchWrapper.setState({
             query: 'Munich'
         });
-        let input = 'Berlin'
+        let input = 'Berlin';
         const eventObject = { target: { value: input }};
         CitySearchWrapper.find('.city').simulate('change', eventObject);
         expect(CitySearchWrapper.state('query')).toBe(input);
