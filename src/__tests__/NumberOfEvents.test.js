@@ -3,22 +3,11 @@ import { shallow } from 'enzyme';
 import NumberOfEvents from '../NumberOfEvents';
 import CitySearch from '../CitySearch';
 import mockData from '../mockData';
-import { extractLocations } from '../api';
 
 describe('<NumberOfEvents /> Component',()=>{
-    let NumberOfEventsWrapper, CitySearchWrapper;
+    let NumberOfEventsWrapper;
     beforeAll(()=>{
-        NumberOfEventsWrapper = shallow(<NumberOfEvents />);
-        CitySearchWrapper = shallow(<CitySearch />);
-    });
-
-    test('render NumberOfEvents component if a city is selected',()=>{
-        expect(CitySearchWrapper.find(NumberOfEvents)).toHaveLength(0);
-        CitySearchWrapper.setState({
-            query: 'Berlin'
-        });
-        CitySearchWrapper.find('.suggestions li').at(0).simulate('click');
-        expect(CitySearchWrapper.find(NumberOfEvents)).toHaveLength(1);
+        NumberOfEventsWrapper = shallow(<NumberOfEvents events={mockData} />);
     });
 
     test('default input is 32 after input renders',()=>{
@@ -31,9 +20,4 @@ describe('<NumberOfEvents /> Component',()=>{
         NumberOfEventsWrapper.find('.number').simulate('change', eventObject);
         expect(NumberOfEventsWrapper.state('eventNum')).toBe(input);
     });
-
-    test('filter number of events shown by input value', ()=>{
-        
-    })
-
 });

@@ -5,8 +5,18 @@ import Event from '../Event';
 import mockData from '../mockData';
 
 describe('<EventList /> component', () => {
+  let EventListWrapper;
+
+  beforeAll(()=>{
+    EventListWrapper = shallow(<EventList events={mockData} />);
+  });
+  
+  test('render ul list for events', ()=>{
+    expect(EventListWrapper.find('.EventList')).toHaveLength(1);
+  });
+
   test('render correct number of events', () => {
-    const EventListWrapper = shallow(<EventList events={mockData} />);
     expect(EventListWrapper.find(Event)).toHaveLength(mockData.length);
   });
+
 });

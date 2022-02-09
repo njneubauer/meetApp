@@ -1,6 +1,4 @@
 import React, { Component } from "react";
-import { extractLocations } from './api';
-import NumberOfEvents from "./NumberOfEvents";
 
 class CitySearch extends Component{
     state = {
@@ -40,7 +38,6 @@ class CitySearch extends Component{
                         <b>see all cities</b>
                     </li>
                 </ul>
-                {this.state.query && <NumberOfEvents  />}
             </div>
         );
     };

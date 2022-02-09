@@ -20,13 +20,6 @@ describe('<App /> component', ()=>{
     });
 
     test('render NumberOfEvents component if a city is selected', ()=>{
-        const CitySearchWrapper = shallow(<CitySearch />);
-        expect(CitySearchWrapper.find(NumberOfEvents)).toHaveLength(0);
-
-        CitySearchWrapper.setState({
-            query: 'Berlin'
-        });
-        CitySearchWrapper.find('.suggestions li').at(0).simulate('click');
-        expect(CitySearchWrapper.find(NumberOfEvents)).toHaveLength(1);
+        expect(AppWrapper.find(NumberOfEvents)).toHaveLength(1);
     })
 });
