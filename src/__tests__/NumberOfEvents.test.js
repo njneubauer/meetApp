@@ -7,7 +7,7 @@ import mockData from '../mockData';
 describe('<NumberOfEvents /> Component',()=>{
     let NumberOfEventsWrapper;
     beforeAll(()=>{
-        NumberOfEventsWrapper = shallow(<NumberOfEvents events={mockData} />);
+        NumberOfEventsWrapper = shallow(<NumberOfEvents events={mockData} updateEvents={()=>{}} />);
     });
 
     test('default input is 32 after input renders',()=>{
@@ -18,6 +18,6 @@ describe('<NumberOfEvents /> Component',()=>{
         const input = 10;
         const eventObject = { target: { value: input }};
         NumberOfEventsWrapper.find('.number').simulate('change', eventObject);
-        expect(NumberOfEventsWrapper.state('eventNum')).toBe(input);
+        expect(NumberOfEventsWrapper.state('eventCount')).toBe(input);
     });
 });

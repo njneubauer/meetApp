@@ -19,8 +19,8 @@ class Event extends Component {
             <div className="Event">
                 <h1 className="title">{ event.summary }</h1>
                 <p className="start-time">{ event.start.dateTime }</p>
-                <p className="summary-location">@{ event.summary }|{event.location}</p>
-                <button className="btn-details" onClick={()=>this.handleClick}>{showDetails ? "hide details" : "show details"}</button>                  
+                <p className="summary-location">@{ event.summary } | {event.location}</p>
+                <button className="details-btn" onClick={()=>this.handleClick()}>{showDetails ? "hide details" : "show details"}</button>                  
                      {showDetails && 
                         <div className="details">
                             <h3 className="header">About Event:</h3>

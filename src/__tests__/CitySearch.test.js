@@ -9,7 +9,7 @@ describe('<CitySearch /> component',()=>{
     
     beforeAll(()=>{
         locations = extractLocations(mockData);
-        CitySearchWrapper = shallow(<CitySearch locations={locations}/>);
+        CitySearchWrapper = shallow(<CitySearch locations={locations} updateEvents={()=>{}} />);
     });
 
     test('render text input',()=>{
@@ -54,7 +54,12 @@ describe('<CitySearch /> component',()=>{
             query: 'Berlin'
         });
         const suggestions = CitySearchWrapper.state('suggestions');
-        CitySearchWrapper.find('.suggestions li').at(0).simulate('click');
+        CitySearchWrapper.find('.suggestions li').at(0).simulate('mouseDown');
         expect(CitySearchWrapper.state('query')).toBe(suggestions[0]);
     })
+
+    test('selecting CitySearch input reveals the suggestions list',()=>{
+        CitySearchWrapper.find('.city').simulate('focus');
+        
+    });
 });
