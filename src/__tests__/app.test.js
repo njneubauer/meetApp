@@ -27,12 +27,6 @@ describe('<App /> component', ()=>{
 });
 
 describe('<App /> integration testing', ()=>{
-    let mockElementDOM;
-    
-    beforeAll(()=>{
-        mockElementDOM = {classList: {add: jest.fn(), remove: jest.fn()}};
-        
-    });
 
     test('App passes state as prop to EventList', ()=>{
         const AppWrapper = mount(<App />);
@@ -56,23 +50,63 @@ describe('<App /> integration testing', ()=>{
         const locations = extractLocations(mockData);
         CitySearchWrapper.setState({ suggestions: locations });
         const suggestions = CitySearchWrapper.state('suggestions');
+        // select random index
         const selectedIndex = Math.floor(Math.random() * (suggestions.length));
+        // select city by index
         const selectedCity = suggestions[selectedIndex];
+        // simulate city selection & get events
         await CitySearchWrapper.instance().handleItemClicked(selectedCity);
         const allEvents = await getEvents();
+        // filter events by selected city
         const eventsToShow = allEvents.filter(event => event.location === selectedCity);
+        // check to see if events state === filtered events
         expect(AppWrapper.state('events')).toEqual(eventsToShow);
         AppWrapper.unmount();
       });
 
       test('get list of all events when user selects "See all cities"', async () => {
         const AppWrapper = mount(<App />);
+        // find "see all cities" in suggestions list
         const suggestionItems = AppWrapper.find(CitySearch).find('.suggestions li');
-        await suggestionItems.at(suggestionItems.length - 1).simulate('mouseDown');
+        // simulate select "see all cities"
+        await suggestionItems.at(suggestionItems.length - 1).props().onMouseDown();
+        // call getEvents() and assign to allEvents variable
         const allEvents = await getEvents();
+        // check that events state === allEvents variable
         expect(AppWrapper.state('events')).toEqual(allEvents);
         AppWrapper.unmount();
       });
 
+      test('Send new eventCount to updateEvents() and update eventCount state in <App>', async()=>{
+        const AppWrapper = mount(<App />);
+        const NumberOfEventsInput = AppWrapper.find(NumberOfEvents).find('.number');
+        const eventObject = {target: { value: 5 }};
+        await NumberOfEventsInput.simulate('change', eventObject);
+        const eventCountState = AppWrapper.find(NumberOfEvents).state('eventCount');
+        const appEventCountState = AppWrapper.state('eventCount');
+        expect(eventCountState).toEqual(appEventCountState);
+        AppWrapper.unmount();
+      });
 
+      test('reset locations', async()=>{
+        const AppWrapper = mount(<App />);
+        const CitySearchWrapper = AppWrapper.find(CitySearch);
+        const locations = extractLocations(mockData);
+        CitySearchWrapper.setState({ suggestions: locations });
+        const suggestions = CitySearchWrapper.state('suggestions');
+        // select random index
+        const selectedIndex = Math.floor(Math.random() * (suggestions.length));
+        // select city by index
+        const selectedCity = suggestions[selectedIndex];
+        // simulate city selection & get events
+        await CitySearchWrapper.instance().handleItemClicked(selectedCity);
+        // selected city === citySearch state "query"
+        expect(selectedCity).toEqual(CitySearchWrapper.state('query'));
+        // Simulate reset button click
+        CitySearchWrapper.find('.reset-btn').props().onClick();
+        // check the citySearch state "query" === ''
+        expect(CitySearchWrapper.state('query')).toEqual('');
+        AppWrapper.unmount();
+
+      })
 });

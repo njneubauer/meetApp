@@ -36,13 +36,6 @@ input[type="number"] {
   height: 38px;
 }
 
-/* .search-wrapper {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: center;
-} */
-
 .city {
   width: 250px;
 }
@@ -54,6 +47,21 @@ input[type="number"] {
   max-width: 300px;
   margin: auto;
   position: relative;
+}
+
+.reset-btn {
+  position: absolute;
+  margin: -35px 0 100px 135px;
+  padding: 6px 10px 6px 10px;
+  cursor: pointer;
+  border-radius: 5px;
+  border: 1px solid #4285f4;
+  background-color: #116cfd;
+  color: whitesmoke;
+}
+
+.reset-btn:hover{
+  background-color: #3a85ff;
 }
 
 .suggestions {

@@ -4,23 +4,23 @@ class CitySearch extends Component{
     state = {
         query: '',
         suggestions: [],
-        itemSelected: false
+        showSuggestions: undefined
     }
 
-    showSuggestionList(bool){
-        const suggestionsElement = document.getElementById("suggestions");
-        if(bool === true){
-            suggestionsElement.classList.add('showSuggestions');
-            suggestionsElement.classList.remove('display-none');  
+    handleFocusToggle = (event)=>{
+        let showSuggestions = this.state.showSuggestions;
+        if(showSuggestions === true){
+            this.setState({ 
+                showSuggestions: false
+            });
         }
         else{
-            suggestionsElement.classList.remove('showSuggestions');
-            suggestionsElement.classList.add('display-none');
-        }   
-    }
+            this.setState({ 
+                suggestions: this.props.locations,
+                showSuggestions: true
+            });
 
-    handleFocus(event){
-        // this.showSuggestionList(false);
+        }
     }
 
     handelInputChanged = (event) =>{
@@ -31,39 +31,38 @@ class CitySearch extends Component{
         this.setState({
             query: value,
             suggestions,
-            itemSelected: false
+            showSuggestions: true
         });
-        // this.showSuggestionList(true);
     }
 
     handleItemClicked = (suggestion)=>{
         this.setState({
             query: suggestion,
-            itemSelected: true
         });
         this.props.updateEvents({location: suggestion});
-        // this.showSuggestionList(false);
     }
 
     render(){
         return (
+            <>
             <div className="CitySearch">
                 <h3>Choose your nearest city</h3>
-                <input className="city" type="text" placeholder="Search City" value={this.state.query} 
-                    onClick={this.handelInputChanged} 
-                    onBlur={(event)=>this.handleFocus(event)} 
+                <input id="city" className="city" type="text" placeholder="Search City" value={this.state.query} 
+                    onFocus={this.handleFocusToggle} 
+                    onBlur={this.handleFocusToggle} 
                     onChange={this.handelInputChanged} 
                 />
-                
-                <ul id="suggestions" className={this.state.query ? "suggestions showSuggestions" : "suggestions display-none" }>
+                <ul id="suggestions" className="suggestions" style={this.state.showSuggestions ? {}: { display: 'none' }} >
                     {this.state.suggestions.map((suggestion)=>(
                         <li key={suggestion} onMouseDown={()=>this.handleItemClicked(suggestion)}>{suggestion}</li>
                     ))}
-                    <li onMouseDown={()=>this.handleItemClicked('all')} key='all'>
+                    <li onMouseDown={()=>this.handleItemClicked('')} key='all-cities'>
                         <b>see all cities</b>
                     </li>
                 </ul>
             </div>
+            <button id="clearCity" className="reset-btn" onClick={()=>this.handleItemClicked('')}>Reset City</button>
+            </>
         );
     };
 }
