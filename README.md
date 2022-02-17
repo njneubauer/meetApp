@@ -58,9 +58,9 @@ To build a serverless progressive web application with ReactJS using a test-driv
 &nbsp;&nbsp; <strong> Then </strong> the default number of events shown is set to 32 <br>
 
 ### Scenario 2: User can change the number of events they want to see
-&nbsp;&nbsp; <strong> Given </strong> the user navigates to the events page <br>
+&nbsp;&nbsp; <strong> Given </strong> the user changes the numerical value of number of events input <br>
 &nbsp;&nbsp; <strong> When </strong> the event elements load <br>
-&nbsp;&nbsp; <strong> Then </strong> the default number of events shown is set to 32 <br>
+&nbsp;&nbsp; <strong> Then </strong> the number of events shown is equal to the value entered into number of events input <br>
 
 <br>
 
