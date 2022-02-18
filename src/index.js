@@ -9,7 +9,6 @@ import * as atatus from 'atatus-spa';
 // --------------- Monitoring with Atatus -----------------
 
 atatus.config('6d2bbcfd20924ac1b0f9b268f5e2b823').install();
-atatus.notify(new Error('Test Atatus Setup'));
 
 // --------------------------------------------------------
 
