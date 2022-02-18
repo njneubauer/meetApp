@@ -34,30 +34,6 @@ const removeQuery = () => {
     }
   };
 
-export const getEvents = async () => {
-    NProgress.start();
-
-
-   if(window.location.href.startsWith('http://localhost')){
-       return mockData
-   }
-
-   const token = await getAccessToken();
-
-  if (token) {
-    removeQuery();
-    const url = 'https://ihynx14yqb.execute-api.us-east-2.amazonaws.com/dev/api/get-events' + '/' + token;
-    const result = await axios.get(url);
-    if (result.data) {
-      var locations = extractLocations(result.data.events);
-      localStorage.setItem("lastEvents", JSON.stringify(result.data));
-      localStorage.setItem("locations", JSON.stringify(locations));
-    }
-    NProgress.done();
-    return result.data.events;
-  }
-};
-
 const getToken = async (code) => {
     const encodeCode = encodeURIComponent(code);
     const { access_token } = await fetch(
@@ -90,4 +66,28 @@ export const getAccessToken = async() => {
         return code && getToken(code);
     }
     return accessToken;
+};
+
+export const getEvents = async () => {
+  NProgress.start();
+
+
+ if(window.location.href.startsWith('http://localhost')){
+     return mockData
+ }
+
+ const token = await getAccessToken();
+
+if (token) {
+  removeQuery();
+  const url = 'https://ihynx14yqb.execute-api.us-east-2.amazonaws.com/dev/api/get-events' + '/' + token;
+  const result = await axios.get(url);
+  if (result.data) {
+    var locations = extractLocations(result.data.events);
+    localStorage.setItem("lastEvents", JSON.stringify(result.data));
+    localStorage.setItem("locations", JSON.stringify(locations));
+  }
+  NProgress.done();
+  return result.data.events;
+}
 };
