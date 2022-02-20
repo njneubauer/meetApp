@@ -39,7 +39,7 @@ module.exports.getAuthURL = async() => {
     },
     body: JSON.stringify({
       authUrl: authUrl,
-    }),
+    })
   };
 };
 
