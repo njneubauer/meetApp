@@ -35,11 +35,16 @@ class CitySearch extends Component{
         });
     }
 
-    handleItemClicked = (suggestion)=>{
+    handleItemClicked = (suggestion, reset)=>{
         this.setState({
             query: suggestion,
         });
-        this.props.updateEvents({location: suggestion});
+        if(reset === true){
+            this.props.updateEvents({location: suggestion, eventCount: 32});
+        }
+        else{
+            this.props.updateEvents({location: suggestion});
+        }
     }
 
     render(){
@@ -61,7 +66,7 @@ class CitySearch extends Component{
                     </li>
                 </ul>
             </div>
-            <button id="clearCity" className="reset-btn" onClick={()=>this.handleItemClicked('')}>Reset City</button>
+            <button id="clearCity" className="reset-btn" onClick={()=>this.handleItemClicked('', true)}>Reset</button>
             </>
         );
     };

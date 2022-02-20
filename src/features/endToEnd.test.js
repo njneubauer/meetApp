@@ -6,7 +6,10 @@ describe('show/hide an event details', () => {
     beforeAll(async () => {
         browser = await puppeteer.launch({
             headless: false,
-            slowMo: 250
+            slowMo: 200,
+            args: [
+                '--disable-features=SameSiteByDefaultCookies,CookiesWithoutSameSiteMustBeSecure'
+            ]
         });
         page = await browser.newPage();
         await page.goto('http://localhost:3000/');
