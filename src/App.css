@@ -34,6 +34,7 @@ input[type="number"] {
   line-height: 20px;
   align-self: center;
   height: 38px;
+  margin-bottom: 15px;
 }
 
 .city {
@@ -49,9 +50,13 @@ input[type="number"] {
   position: relative;
 }
 
+.CitySearch h3 {
+  margin-top: 35px;
+}
+
 .reset-btn {
   position: absolute;
-  margin: -35px 0 100px 135px;
+  margin: -50px 0 100px 135px;
   padding: 6px 10px 6px 10px;
   cursor: pointer;
   border-radius: 5px;
@@ -69,7 +74,18 @@ input[type="number"] {
   position: absolute;
   z-index: 2;
   align-self: center;
-  margin: 0;
+  margin: 13px;
+  top: 105px;
+  font-size: 14px;
+  box-shadow: 10px 10px 16px -12px rgba(0, 0, 0, 0.75);
+}
+
+.suggestions-alert {
+  width: 250px;
+  position: absolute;
+  z-index: 2;
+  align-self: center;
+  margin: 45px;
   top: 105px;
   font-size: 14px;
   box-shadow: 10px 10px 16px -12px rgba(0, 0, 0, 0.75);
@@ -143,9 +159,14 @@ input[type="number"] {
   font-family: sans-serif;
 }
 
-.Alert {
-  position: fixed;
-  top: 20px;
+.Alert-info {
+  position: absolute;
+  margin: -20px 0 0 0;
+}
+
+.Alert-error {
+  position: absolute;
+  margin: -16px 0 0 -17px;
 }
 
 .data-vis-wrapper {
