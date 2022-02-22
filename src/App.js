@@ -3,6 +3,7 @@ import './App.css';
 import EventList from './EventList';
 import CitySearch from './CitySearch';
 import NumberOfEvents from './NumberOfEvents';
+import { WarningAlert } from './Alert';
 import { getEvents, extractLocations } from './api';
 
 class App extends Component {
@@ -19,6 +20,14 @@ class App extends Component {
       if (this.mounted){
         this.setState({events: events.slice(0, this.state.eventCount), locations: extractLocations(events) });
       }
+    });
+    
+    window.addEventListener('online', ()=>{
+      this.setState({offlineWarning: ''})
+    });
+
+    window.addEventListener('offline', ()=>{
+      this.setState({offlineWarning: 'No internet connection detected. Events loaded from cache and may not be up-to-date.'})
     });
   }
 
@@ -54,6 +63,7 @@ class App extends Component {
     const { events, locations } = this.state;
     return (
       <div className="App">
+        <WarningAlert text={this.state.offlineWarning} className={'Alert-warning'} />
         <h1>Meet App</h1>
           <div className='search-wrapper'>
             <CitySearch locations={locations} updateEvents={this.updateEvents} />

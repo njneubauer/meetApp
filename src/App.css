@@ -169,6 +169,11 @@ input[type="number"] {
   margin: -16px 0 0 -17px;
 }
 
+.Alert-warning {
+  display: flex;
+  justify-content: center;
+}
+
 .data-vis-wrapper {
   display: flex;
   align-items: center;
