@@ -10,6 +10,8 @@ class CitySearch extends Component{
 
     handleFocusToggle = (event)=>{
         let showSuggestions = this.state.showSuggestions;
+        const suggestions = this.props.locations.sort();
+        
         if(showSuggestions === true){
             this.setState({ 
                 showSuggestions: false
@@ -17,7 +19,7 @@ class CitySearch extends Component{
         }
         else{
             this.setState({ 
-                suggestions: this.props.locations,
+                suggestions: suggestions,
                 showSuggestions: true
             });
 
@@ -28,19 +30,19 @@ class CitySearch extends Component{
         const value = event.target.value;
         const suggestions = this.props.locations.filter((location)=>{
             return location.toUpperCase().indexOf(value.toUpperCase()) > -1;
-        })
+        }).sort();
         
         if(suggestions.length === 0){
             this.setState({
                 query: value,
-                suggestions,
+                suggestions: suggestions,
                 infoText: "We can not find the city you are looking for. Please try another city."
             });
         }
         else {
             this.setState({
                 query: value,
-                suggestions,
+                suggestions: suggestions,
                 infoText: ''
             });
         }
