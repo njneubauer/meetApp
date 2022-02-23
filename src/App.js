@@ -7,32 +7,41 @@ import { WarningAlert } from './Alert';
 import { getEvents, extractLocations } from './api';
 
 class App extends Component {
-  state = {
-    events: [],
-    locations: [],
-    location: '',
-    eventCount: 32
-  }
+  constructor(props){
+    window.addEventListener('online', ()=>{
+      this.setState({ offlineWarning: '' });
+    });
 
+    window.addEventListener('offline', ()=>{
+      this.setState({ offlineWarning: 'No internet connection detected. Events loaded from cache and may not be up-to-date.' });
+    });
+    
+    super(props);
+      this.state = {
+        events: [],
+        locations: [],
+        location: '',
+        eventCount: 32,
+      }
+    }
+  
   componentDidMount(){
     this.mounted = true;
+    this.checkOnlineStatus();
     getEvents().then((events)=>{
       if (this.mounted){
         this.setState({events: events.slice(0, this.state.eventCount), locations: extractLocations(events) });
       }
     });
-    
-    window.addEventListener('online', ()=>{
-      this.setState({offlineWarning: ''})
-    });
-
-    window.addEventListener('offline', ()=>{
-      this.setState({offlineWarning: 'No internet connection detected. Events loaded from cache and may not be up-to-date.'})
-    });
   }
 
-  componentWillUnmount(){
-    this.mounted = false;
+  checkOnlineStatus(){
+    if(!navigator.onLine){
+      this.setState({ offlineWarning: 'No internet connection detected. Events loaded from cache and may not be up-to-date.' });
+    }
+    else{
+      this.setState({ offlineWarning: '' });
+    }
   }
 
   updateEvents = ({location, eventCount}) => {
@@ -61,6 +70,7 @@ class App extends Component {
 
   render(){
     const { events, locations } = this.state;
+
     return (
       <div className="App">
         <WarningAlert text={this.state.offlineWarning} className={'Alert-warning'} />
