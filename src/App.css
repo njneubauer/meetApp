@@ -177,6 +177,7 @@ input[type="number"] {
 .data-vis-wrapper {
   display: flex;
   align-items: center;
+  justify-content: center;
   flex-direction: column;
 }
 .data-vis-wrapper .recharts-responsive-container {
@@ -239,7 +240,6 @@ input[type="number"] {
   font-family: "Roboto";
 }
 
-
 @media only screen and (min-width: 992px) {
   .data-vis-wrapper {
     flex-direction: row;
@@ -250,4 +250,13 @@ input[type="number"] {
     min-width: auto;
     margin: 0 auto;
   }
+}
+
+/******* Rechart CSS *******/
+.custom-tooltip {
+  margin: 0;
+  line-height: 24px;
+  border: 0px solid #f5f5f5;
+  background-color: #ffa3b3;
+  padding: 10px 20px;
 }
