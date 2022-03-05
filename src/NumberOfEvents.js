@@ -10,6 +10,7 @@ class NumberOfEvents extends Component {
         console.log(this.props.maxNumEvents);
         const newNumber = event.target.value;
         if(newNumber < 1 || newNumber > this.props.maxNumEvents){
+            this.props.updateEvents({eventCount: newNumber});
             this.setState({errorText: `Select a number between 1 to ${this.props.maxNumEvents}`});
         }
         else {

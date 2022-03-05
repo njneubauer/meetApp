@@ -120,8 +120,6 @@ class App extends Component {
           </div>
           <h2>Events in each city</h2>
           <div className="data-vis-wrapper">
-            {(this.state.location !== '') ? false : 
-            <>
             <EventGenre events={events} />
             <ResponsiveContainer height={300}>
               <ScatterChart
@@ -138,7 +136,6 @@ class App extends Component {
               <Scatter data={ this.getData() } fill="#DD6D85" />          
               </ScatterChart>
           </ResponsiveContainer>
-          </>}
          </div>
           <EventList events={events} />
       </div>
