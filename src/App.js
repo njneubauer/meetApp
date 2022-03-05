@@ -27,6 +27,7 @@ class App extends Component {
         locations: [],
         location: '',
         eventCount: 32,
+        maxNumEvents: null
       }
     }
   
@@ -34,6 +35,11 @@ class App extends Component {
     this.mounted = true;
     this.checkOnlineStatus();
     getEvents().then((events)=>{
+      if (events.length < 32){
+        this.setState({eventCount: events.length});
+      }
+      this.setState({maxNumEvents: events.length});
+      
       if (this.mounted){
         this.setState({events: events.slice(0, this.state.eventCount), locations: extractLocations(events) });
       }
@@ -63,6 +69,11 @@ class App extends Component {
     }
 
     getEvents().then((events) => {
+      if (events.length < 32){
+        this.setState({eventCount: events.length});
+      }
+      this.setState({maxNumEvents: events.length});
+
       const locationEvents = (this.state.location === '') ?
       events.slice(0, this.state.eventCount) :
       events.filter((event)=>event.location === this.state.location).slice(0, this.state.eventCount);
@@ -76,8 +87,8 @@ class App extends Component {
   getData=()=>{
     const {locations, events} = this.state;
     const data = locations.map((location)=>{
-      const number = events.filter((event) => event.location === location).length
-      const city = location.split(', ').shift()
+      const number = events.filter((event) => event.location === location).length;
+      const city = location.split(', ').shift();
       return {city, number};
     })
     return data;
@@ -105,10 +116,12 @@ class App extends Component {
         <h1>Meet App</h1>
           <div className='search-wrapper'>
             <CitySearch locations={locations} updateEvents={this.updateEvents} />
-            <NumberOfEvents updateEvents={this.updateEvents} eventCount={this.state.eventCount} />
+            <NumberOfEvents updateEvents={this.updateEvents} eventCount={this.state.eventCount} maxNumEvents={this.state.maxNumEvents} />
           </div>
           <h2>Events in each city</h2>
           <div className="data-vis-wrapper">
+            {(this.state.location !== '') ? false : 
+            <>
             <EventGenre events={events} />
             <ResponsiveContainer height={300}>
               <ScatterChart
@@ -125,6 +138,7 @@ class App extends Component {
               <Scatter data={ this.getData() } fill="#DD6D85" />          
               </ScatterChart>
           </ResponsiveContainer>
+          </>}
          </div>
           <EventList events={events} />
       </div>

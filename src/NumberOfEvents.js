@@ -5,12 +5,12 @@ class NumberOfEvents extends Component {
     state={
         errorText: ''
     }
-
+    
     handleInputChange = (event)=>{
+        console.log(this.props.maxNumEvents);
         const newNumber = event.target.value;
-        if(newNumber > 32 || newNumber < 1){
-            this.props.updateEvents({eventCount: newNumber});
-            this.setState({errorText: 'Select a number between 1 to 32'});
+        if(newNumber < 1 || newNumber > this.props.maxNumEvents){
+            this.setState({errorText: `Select a number between 1 to ${this.props.maxNumEvents}`});
         }
         else {
             this.props.updateEvents({eventCount: newNumber});

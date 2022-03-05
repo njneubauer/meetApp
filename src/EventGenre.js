@@ -16,7 +16,6 @@ function EventGenre({ events }){
             const value = events.filter((e)=> e.summary.includes(genre)).length 
               return { name: genre, value };
         });
-        console.log(data);
         const cleanData = data.filter((data)=> data.value > 0);
         return cleanData;
     }
@@ -34,6 +33,7 @@ function EventGenre({ events }){
       return (
         <div className="custom-tooltip" style={{background: payload[0].payload.fill}}>
           <p className="label" >{payload[0].payload.name}</p>
+          <p className="label" style={{fontSize: 12}}>Events: {payload[0].payload.value}</p>
         </div>
       );
     }
