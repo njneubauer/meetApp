@@ -2,10 +2,19 @@
 .App {
   text-align: center;
   padding: 2% 5%;
+  background-color: #274475;
+  color: #fc6399;
 }
 
 .App * {
   box-sizing: border-box;
+}
+
+a {
+  color: rgb(255, 255, 255);
+}
+a:hover {
+  color: rgb(196, 196, 196);
 }
 
 ul {
@@ -20,6 +29,7 @@ p {
 .display-none {
   display: none;
 }
+
 .showSuggestions {
   display: block;
 }
@@ -60,13 +70,15 @@ input[type="number"] {
   padding: 6px 10px 6px 10px;
   cursor: pointer;
   border-radius: 5px;
-  border: 1px solid #4285f4;
-  background-color: #116cfd;
-  color: whitesmoke;
+  border: 1px solid #fc6399;
+  background-color: #fc6399;
+  color: black;
+  font-weight: bold;
 }
 
 .reset-btn:hover{
-  background-color: #3a85ff;
+  background-color: #ff849f;
+  border: 1px solid #ff849f;
 }
 
 .suggestions {
@@ -78,6 +90,7 @@ input[type="number"] {
   top: 105px;
   font-size: 14px;
   box-shadow: 10px 10px 16px -12px rgba(0, 0, 0, 0.75);
+  color: black;
 }
 
 .suggestions-alert {
@@ -111,19 +124,34 @@ input[type="number"] {
   padding: 10px 10px 35px;
   margin-bottom: 10px;
   text-align: left;
-  border: 1px solid #ccc;
+  border: 1px solid #fc6399;
   border-radius: 4px;
   position: relative;
 }
 
-.details-btn {
+.details-btn-show {
   position: absolute;
   right: 5px;
   bottom: 5px;
   padding: 5px 8px;
   border-radius: 4px;
-  outline: none;
+  border-color: #fc6399;
   cursor: pointer;
+  background: transparent;
+  color: #fc6399;
+}
+
+.details-btn-hide {
+  position: absolute;
+  right: 5px;
+  bottom: 5px;
+  padding: 5px 8px;
+  border-radius: 4px;
+  border-color: #fc6399;
+  cursor: pointer;
+  background: transparent;
+  background-color: #fc6399;
+  color: #000;
 }
 
 .name {
@@ -180,10 +208,12 @@ input[type="number"] {
   justify-content: center;
   flex-direction: column;
 }
+
 .data-vis-wrapper .recharts-responsive-container {
   min-width: 100%;
   display: flex;
 }
+
 .recharts-surface {
   overflow: visible;
 }
@@ -231,6 +261,7 @@ input[type="number"] {
   width: 18px;
   height: 18px;
 }
+
 .btn-text {
   float: right;
   margin: 11px 11px 0 0;
@@ -256,7 +287,9 @@ input[type="number"] {
 .custom-tooltip {
   margin: 0;
   line-height: 24px;
-  border: 0px solid #f5f5f5;
-  background-color: #ffa3b3;
+  border: 2px solid #f5f5f5;
+  background-color: #fc6399;
+  border-radius: 4px;
+  color: black;
   padding: 10px 20px;
 }

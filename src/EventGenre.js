@@ -1,24 +1,46 @@
 import React, {useEffect, useState} from 'react';
-import { PieChart, Pie, Sector, Cell, ResponsiveContainer } from 'recharts';
+import { PieChart, Pie, Legend, Cell, Tooltip, ResponsiveContainer } from 'recharts';
 
 function EventGenre({ events }){
   const [ data, setData ] = useState([]);
-  
+  const [ screenWidth, setScreenWidth ] = useState(0);
+
   useEffect(()=>{
+    reportWindowSize();
     setData(()=> getData(events));
   },[events]);
   
   function getData(events){
-        const genres = ['React', 'JavaScript', 'Node', 'jQuery', 'AngularJS'];
+        const genres = ['React', 'JavaScript', 'Node', 'jQuery', 'Angular'];
         const data = genres.map((genre)=>{
-            const value = events.filter((e)=> e.summary.split(' ').includes(genre)).length 
+            const value = events.filter((e)=> e.summary.includes(genre)).length 
               return { name: genre, value };
         });
+        console.log(data);
         const cleanData = data.filter((data)=> data.value > 0);
         return cleanData;
     }
-    // const COLORS = ['#17DBFF', '#1C74E6', '#2B32F9', '#6C1CEB', '#D31FFF'];
-    const COLORS = ['#2626F0', '#5832F0', '#7939DA', '#A432F0', '#C82BF0'];
+ 
+    const COLORS = ['#F589F3', '#DB86F7', '#A771DE', '#A78DF7', '#8A8AED'];
+
+  function reportWindowSize() {
+    let widthOutput = window.innerWidth;
+    setScreenWidth(widthOutput);
+  }
+
+  window.onresize = reportWindowSize;
+  const CustomTooltip = ({ active, payload, label }) => {
+    if (active) {
+      return (
+        <div className="custom-tooltip" style={{background: payload[0].payload.fill}}>
+          <p className="label" >{payload[0].payload.name}</p>
+        </div>
+      );
+    }
+  
+    return null;
+  };
+
     return(
       <ResponsiveContainer height={300}>
           <PieChart width={200} height={200}>
@@ -27,15 +49,19 @@ function EventGenre({ events }){
                 cx="50%"
                 cy="50%"
                 labelLine={false}
-                label={({ name, percent })=>`${name} ${(percent * 100).toFixed(0)}%`}
+                // label={({ name, percent })=>`${name} ${(percent * 100).toFixed(0)}%`}
+                label={(screenWidth < 992) ? false : ({ name, percent })=>`${name} ${(percent * 100).toFixed(0)}%`}
                 outerRadius={80}
                 fill="#8884d8"
                 dataKey="value"
+                ticks={false}
               >
               {data.map((entry, index) => (
                   <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
               ))}
               </Pie>
+              <Legend verticalAlign="top" height={36}/>
+              <Tooltip content={<CustomTooltip />}/>
           </PieChart>
       </ResponsiveContainer>
 
