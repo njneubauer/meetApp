@@ -9,6 +9,8 @@ To build a serverless progressive web application with ReactJS using a test-driv
 ### User Story:
 * As a user I should be able to filter events by city, so I can see a list of events that will take place in that city
 
+<br>
+
 ### Scenario 1: When user hasn’t searched for a city, show upcoming events from all cities
 &nbsp;&nbsp; **Given** the user has not searched for a city <br>
 &nbsp;&nbsp; **When** the events load <br>
